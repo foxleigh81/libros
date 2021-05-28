@@ -25,8 +25,12 @@ def delete_book():
         confirm = readchar.readkey()
         if (confirm == '1'):
             try:
-                books.remove({'isbn': barcode})
+                books.delete_one({'isbn': barcode})
                 print(f"{book_to_delete['title']} has been deleted")
+                print('Press any key to return to the main menu')
+                any_key = readchar.readkey()
+                if (any_key):
+                    pass
             except:
                 print('Deletion failed')
         else:
