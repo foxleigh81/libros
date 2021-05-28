@@ -16,9 +16,9 @@ def delete_book():
         books = libaro_db['books']
 
         barcode = input("Scan book barcode: ")
-        doomed_book = books.find_one({'isbn': barcode})
+        book_to_delete = books.find_one({'isbn': barcode})
         print()
-        print(doomed_book['title'])
+        print(book_to_delete['title'])
         print()
         print('Confirm delete book')
         print('Press 1 to confirm or any other key to cancel\n')
@@ -26,7 +26,7 @@ def delete_book():
         if (confirm == '1'):
             try:
                 books.remove({'isbn': barcode})
-                print(f"{doomed_book['title']} has been deleted")
+                print(f"{book_to_delete['title']} has been deleted")
             except:
                 print('Deletion failed')
         else:
