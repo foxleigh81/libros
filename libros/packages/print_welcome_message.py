@@ -12,16 +12,6 @@ Usage:
     python3 print_welcome_message.py
 """
 
-
-def add_border(count, string):
-    output = ''
-    i = 0
-    while i < count:
-        output += string
-        i += 1
-    return output
-
-
 def welcome_message():
     print(Fore.MAGENTA + "   _      _ _                   ")
     print(Fore.MAGENTA + "  | |    (_) |                  ")
