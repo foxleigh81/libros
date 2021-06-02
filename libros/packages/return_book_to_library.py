@@ -10,13 +10,12 @@ Usage:
 
     python3 loan_book_from_library.py
 """
-def return_book():
+def return_book(barcode):
     try:
         client = pymongo.MongoClient('10.56.1.30', 27017)
         libaro_db = client["libaro"]
         books = libaro_db['books']
 
-        barcode = input("Scan book barcode: ")
         book_to_update = books.find_one({'isbn': barcode})
         print()
         print(Fore.GREEN + book_to_update['title'])

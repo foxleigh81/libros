@@ -10,16 +10,15 @@ Usage:
 
     python3 delete_book_from_library.py
 """
-def delete_book():
+def delete_book(barcode):
     try:
         client = pymongo.MongoClient('10.56.1.30', 27017)
         libaro_db = client["libaro"]
         books = libaro_db['books']
 
-        barcode = input("Scan book barcode: ")
         book_to_delete = books.find_one({'isbn': barcode})
         print()
-        print(Fore.GREEN + book_to_detete['title'])
+        print(Fore.GREEN + book_to_delete['title'])
         print()
         print(Fore.CYAN + 'Confirm Deleting book')
         print('Press' + Fore.GREEN + ' 1 ' + Style.RESET_ALL + 'to confirm or any other key to cancel\n')

@@ -3,7 +3,8 @@
 import sys
 import requests
 import xml.etree.cElementTree as ET
-import re
+
+from packages.validate_isbn import validate_isbn
 
 """ Gets the book data from the OCLC database
 
@@ -13,13 +14,6 @@ Usage:
 """
 
 oclc_endpoint = 'http://classify.oclc.org/classify2/Classify?summary=true'
-
-
-def validate_isbn(code):
-    if (re.search("^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$", code)):
-        return code
-    else:
-        raise Exception('Barcode is not a valid ISBN number')
 
 
 def get_book(barcode):

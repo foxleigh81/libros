@@ -33,7 +33,7 @@ def find_book():
         book_array = []
 
         if (selection == '1'):
-            barcode = input("Scan book barcode: ")
+            barcode = input("Scan book barcode or type the isbn: ")
             book_array = books.find({'isbn': barcode})
         
         if (selection == '2'):
@@ -41,10 +41,10 @@ def find_book():
             print(Style.DIM + '(You can enter part of a title but this may yield multiple results)\n')
             title = input('')
             book_array = books.find({'title' : {
-                "$regex": f"{title}",
-                "$options": "i"
+                    "$regex": f"{title}",
+                    "$options": "i"
                 }
-                })
+            })
         
         if (selection == '3'):
             print('\nType the name of the author and press enter\n')
@@ -53,11 +53,14 @@ def find_book():
             book_array = books.find({'author' :  {
                 "$regex": f"{author}",
                 "$options": "i"
-                }
-                })
+            }
+            })
         
         if(selection == '4'):
             book_array = books.find()
+
+        if not (book_array):
+            print(Fore.RED + 'No books found')
 
         for book in book_array:
             print(Fore.BLUE +'==================================')

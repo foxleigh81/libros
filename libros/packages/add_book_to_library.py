@@ -14,12 +14,10 @@ Usage:
 
     python3 add_book_to_library.py
 """
-def add_book_to_library():
+def add_book(barcode):
     client = pymongo.MongoClient('10.56.1.30', 27017)
     libaro_db = client["libaro"]
     books = libaro_db['books']
-
-    barcode = input("Scan book barcode: ")
 
     book_data = get_book(barcode)
 
@@ -28,7 +26,7 @@ def add_book_to_library():
     add_book = True
 
     if (existing_copy):
-        print('This book already exists in the library.\n')
+        print(Fore.RED + 'This book already exists in the library.\n')
         print('Press' + Fore.GREEN + ' 1 ' + Style.RESET_ALL + 'to add another copy or any other key to return to the main menu\n')
     
         add_new_book = readchar.readkey()
@@ -44,16 +42,16 @@ def add_book_to_library():
             # Get dewey number
             dewey = book_data[5][0][1].attrib['sfa']
         except:
-            print('Unable to parse book data')
+            print(Fore.RED + 'Unable to parse book data')
 
         try:
             _, cat_name, cat_colour = get_category(dewey)
         except:
-            print('Unable to retrieve category')
+            print(Fore.RED + 'Unable to retrieve category')
         try:
             subcat_name = get_subcategory(dewey)
         except:
-            print('Unable to retreive subcategory')
+            print(Fore.RED + 'Unable to retreive subcategory')
 
         data = {
             'isbn': barcode,
@@ -68,18 +66,17 @@ def add_book_to_library():
 
         try:
             books.insert_one(data)
-            print(f'New book added to the library:\n {book["title"]}\n')
-            print(f'Please give it a {cat_colour} sticker and the number: "{dewey}"\n')
-            print(f'Once done, add the book to the "{cat_name}" section under "{subcat_name}"\n')
-            
+            print(Fore.GREEN + f'New book added to the library:\n {Style.BRIGHT + book["title"]}\n')
+            print(f'Please give it a {Style.BRIGHT + cat_colour + Style.RESET_ALL} sticker and the number: "{Style.BRIGHT + dewey + Style.RESET_ALL}"\n')
+            print(f'Once done, add the book to the "{Style.BRIGHT + cat_name + Style.RESET_ALL}" section under "{Style.BRIGHT + subcat_name + Style.RESET_ALL}"\n')
             print('Press 1 to add another book or any other key to return to the menu:\n')
             confirm = readchar.readkey()
             if (confirm == '1'):
-                add_book_to_library()
+                add_book()
             else:
                 pass
         except:
-            print('Error posting to database')
+            print(Fore.RED +'Error posting to database')
 
 if __name__ == '__main__':
-    add_book_to_library()
+    add_book()
