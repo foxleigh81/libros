@@ -22,7 +22,7 @@ options = [
 
 
 def provide_options():
-    print('Select an option below to continue\n')
+    print(Fore.GREEN + 'Select an option below to continue\n')
     for option in options:
         number, name = option
         print(f'{Fore.GREEN + str(number) + Style.RESET_ALL}: {name}')

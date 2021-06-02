@@ -67,6 +67,8 @@ def find_book():
             print(Fore.CYAN + f"Colour: {Style.RESET_ALL +book['colour']}")
             print(Fore.CYAN + f"DDC: {Style.RESET_ALL +book['ddc']}")
             print(Fore.CYAN + f"ISBN: {Style.RESET_ALL +book['isbn']}")
+            if(book['held_by'] != 'Library'):
+                print(Fore.RED + f"On Loan: {Style.RESET_ALL +book['held_by']}")
             print(Fore.BLUE +'==================================')
         
         print('\nPress any key to return to the main menu...')

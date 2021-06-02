@@ -2,6 +2,8 @@
 
 import pymongo
 import readchar
+from colorama import Fore, Style
+
 from packages.get_dewey_category import get_category
 from packages.get_dewey_subcategory import get_subcategory
 from packages.get_book_from_oclc import get_book
@@ -27,7 +29,7 @@ def add_book_to_library():
 
     if (existing_copy):
         print('This book already exists in the library.\n')
-        print('Press 1 to add another copy or any other key to return to the main menu\n')
+        print('Press' + Fore.GREEN + ' 1 ' + Style.RESET_ALL + 'to add another copy or any other key to return to the main menu\n')
     
         add_new_book = readchar.readkey()
 
