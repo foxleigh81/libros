@@ -25,7 +25,7 @@ def loan_book(barcode):
         confirm = readchar.readkey()
         if (confirm == '1'):
             try:
-                person = input('Please type the name of the person you are loaning the book to and then press enter.')
+                person = input('Please type the name of the person you are loaning the book to and then press enter.\n')
                 books.update_one({'isbn': barcode}, {"$set": { "held_by": person}})
                 print(f"{book_to_update['title']} has been loaned to {person}")
                 print('Press any key to return to the main menu')
