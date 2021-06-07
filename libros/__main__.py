@@ -1,31 +1,47 @@
 #! /usr/bin/env python3
 
-import os
+import readchar
+
 from packages.print_welcome_message import welcome_message
 from packages.print_options_list import provide_options
+from packages.add_book_to_library import add_book
+from packages.delete_book_from_library import delete_book
+from packages.find_a_book import find_book
+from packages.loan_book_from_library import loan_book
+from packages.return_book_to_library import return_book
+from packages.scan_book_barcode import scan_barcode
+from packages.clear_console import clear_console
 
+def main():
+    clear_console()
+    welcome_message()
+    provide_options()
+    option = readchar.readkey()
 
-def clearConsole():
-    """ clears the users console """
-    command = 'clear'
-    if os.name in ('nt', 'dos'):  # If Machine is running on Windows, use cls
-        command = 'cls'
-    os.system(command)
+    if (option == '1'):
+        print('Find a book:\n')
+        find_book()
+        main()
+    elif (option == '2'):
+        print('Loaning a book:\n')
+        loan_book(scan_barcode())
+        main()
+    elif (option == '3'):
+        print('Returning a book:\n')
+        return_book(scan_barcode())
+        main()
+    elif (option == '4'):
+        print('Adding a new book:\n')
+        add_book(scan_barcode())
+        main()
+    elif (option == '5'):
+        print('Deleting a book:\n')
+        delete_book(scan_barcode())
+        main()
+    elif (option == '@'):
+        return
+    else:
+        print("That key does nothing.")
+        main()
 
-
-clearConsole()
-welcome_message()
-provide_options()
-
-option = input('Select option:  ')
-
-if (option == '1'):
-    print("You're checking out a book")
-elif (option == '2'):
-    print("You're returning a book")
-elif (option == '3'):
-    print("you're adding a new book")
-elif (option == '4'):
-    print("You're deleting a book")
-else:
-    print("You cancelled the operation")
+main()

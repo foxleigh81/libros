@@ -1,5 +1,10 @@
 #! /usr/bin/env python3
 
+import colorama
+from colorama import Fore, Back, Style
+
+colorama.init()
+
 """ Display welcome message to the user
 
 Usage:
@@ -7,28 +12,16 @@ Usage:
     python3 print_welcome_message.py
 """
 
-
-def add_border(count, string):
-    output = ''
-    i = 0
-    while i < count:
-        output += string
-        i += 1
-    return output
-
-
 def welcome_message():
-    """ Prints out a predefined string to the console    
-    """
+    print(Fore.MAGENTA + "   _      _ _                   ")
+    print(Fore.MAGENTA + "  | |    (_) |                  ")
+    print(Fore.MAGENTA + "  | |     _| |__  _ __ ___  ___ ")
+    print(Fore.MAGENTA + "  | |    | | '_ \| '__/ _ \/ __|")
+    print(Fore.MAGENTA + "  | |____| | |_) | | | (_) \__ \\")
+    print(Fore.MAGENTA + "  |______|_|_.__/|_|  \___/|___/\n")
+    print(Style.RESET_ALL + "The Foxy Foxleigh library manager")
+    print(Fore.RED + "=================================\n" + Style.RESET_ALL)
 
-    welcome_message = 'Welcome To Libros'
-
-    character_count = len(welcome_message)
-    border_string = add_border(character_count, '#')
-
-    output = f'{border_string}\n{welcome_message}\n{border_string}\n\n'
-
-    print(output)
     return
 
 
